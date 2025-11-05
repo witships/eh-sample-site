@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ひまわり幼稚園</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "メイリオ",
+          Meiryo, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* ヘッダー */
+      header {
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo h1 {
+        font-size: 2rem;
+        color: #ff6b35;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo-icon {
+        font-size: 3rem;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      nav a {
+        color: #ff6b35;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transform: translateY(-2px);
+      }
+
+      /* バナー */
+      .banner {
+        background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+        padding: 4rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .banner::before {
+        content: "🌻";
+        position: absolute;
+        font-size: 20rem;
+        opacity: 0.05;
+        top: -5rem;
+        right: -5rem;
+      }
+
+      .banner h2 {
+        font-size: 2.5rem;
+        color: #ff6b35;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .banner p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .ehon-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+        color: white;
+        padding: 1rem 3rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .ehon-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+      }
+
+      /* コンテナ */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+      }
+
+      /* お知らせ */
+      .news-section {
+        background: white;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        color: #ff6b35;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #ffd700, transparent);
+      }
+
+      .news-list {
+        list-style: none;
+        background: #fffbf0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .news-item {
+        padding: 1.5rem;
+        border-bottom: 1px solid #fff9e6;
+        display: flex;
+        gap: 2rem;
+        transition: background 0.3s ease;
+      }
+
+      .news-item:last-child {
+        border-bottom: none;
+      }
+
+      .news-item:hover {
+        background: #fff9e6;
+      }
+
+      .news-date {
+        background: #ff6b35;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+      }
+
+      .news-content {
+        flex: 1;
+      }
+
+      .news-category {
+        display: inline-block;
+        background: #ffd700;
+        color: #ff6b35;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      /* 所在地 */
+      .location-section {
+        background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+      }
+
+      .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .location-info {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-item {
+        margin-bottom: 1.5rem;
+      }
+
+      .info-label {
+        color: #ff6b35;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .info-text {
+        color: #666;
+        padding-left: 1.5rem;
+      }
+
+      .map-container {
+        background: #e0e0e0;
+        height: 400px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* フッター */
+      footer {
+        background: #ff6b35;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      /* レスポンシブ */
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        nav ul {
+          gap: 1rem;
+        }
+
+        .banner h2 {
+          font-size: 2rem;
+        }
+
+        .location-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .news-item {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">🌻</span>
+          <h1>ひまわり幼稚園</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="#about">園について</a></li>
+            <li><a href="#news">お知らせ</a></li>
+            <li><a href="#access">アクセス</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- バナー -->
+    <section class="banner" id="home">
+      <h2>太陽のように明るく、元気に育つ</h2>
+      <p>子どもたちの笑顔が輝く幼稚園</p>
+      <a href="./ehon/" class="ehon-button">📚 絵本ギャラリーを見る</a>
+    </section>
+
+    <!-- お知らせ -->
+    <section class="news-section" id="news">
+      <div class="container">
+        <h2 class="section-title">お知らせ</h2>
+        <ul class="news-list">
+          <li class="news-item">
+            <span class="news-date">2024.11.05</span>
+            <div class="news-content">
+              <span class="news-category">お知らせ</span>
+              <p>
+                園児たちが描いた絵本ギャラリーを公開しました！ぜひご覧ください。
+              </p>
+            </div>
+          </li>
+          <li class="news-item">
+            <span class="news-date">2024.10.25</span>
+            <div class="news-content">
+              <span class="news-category">イベント</span>
+              <p>
+                2024年度
+                秋の運動会を開催しました。たくさんのご参加ありがとうございました。
+              </p>
+            </div>
+          </li>
+          <li class="news-item">
+            <span class="news-date">2024.10.10</span>
+            <div class="news-content">
+              <span class="news-category">募集</span>
+              <p>
+                2025年度の入園説明会を11月15日（金）に開催します。詳細はお問い合わせください。
+              </p>
+            </div>
+          </li>
+          <li class="news-item">
+            <span class="news-date">2024.09.20</span>
+            <div class="news-content">
+              <span class="news-category">お知らせ</span>
+              <p>園のホームページをリニューアルしました。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 所在地 -->
+    <section class="location-section" id="access">
+      <div class="container">
+        <h2 class="section-title">所在地・アクセス</h2>
+        <div class="location-grid">
+          <div class="location-info">
+            <div class="info-item">
+              <div class="info-label">📍 住所</div>
+              <div class="info-text">
+                〒123-4567<br />
+                東京都○○区ひまわり町1-2-3
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">📞 電話番号</div>
+              <div class="info-text">03-1234-5678</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">🚃 アクセス</div>
+              <div class="info-text">
+                ○○線「ひまわり駅」より徒歩5分<br />
+                バス「ひまわり幼稚園前」下車すぐ
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">🕐 開園時間</div>
+              <div class="info-text">
+                平日 8:00〜18:00<br />
+                土曜日 8:00〜12:00（第2・第4のみ）
+              </div>
+            </div>
+          </div>
+          <!-- <div class="map-container">🗺️ 地図（Google Maps などを埋め込み）</div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+      <p>&copy; 2024 ひまわり幼稚園 All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
